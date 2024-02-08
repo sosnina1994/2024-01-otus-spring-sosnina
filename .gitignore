@@ -1,6 +1,6 @@
-*.iml
-.idea/
-target/
-spring-shell.log
-!**/src/main/**/target/
-!**/src/test/**/target/
+/*.iml
+**/.project
+/.idea
+**/.settings
+**/target
+**/.github

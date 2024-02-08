@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/2024-01-otus-spring-sosnina.iml" filepath="$PROJECT_DIR$/.idea/2024-01-otus-spring-sosnina.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lesson1/lesson1.iml" filepath="$PROJECT_DIR$/lesson1/lesson1.iml" />
-    </modules>
-  </component>
-</project>
