@@ -22,7 +22,7 @@
 
                 <executions>
                     <execution>
-                        <id>homework_01</id>
+                        <id>hw01-xml-config</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
