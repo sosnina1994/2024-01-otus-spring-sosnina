@@ -23,8 +23,8 @@ public class CsvQuestionDao implements QuestionDao {
 
     @Override
     public List<Question> findAll() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream is = Objects.requireNonNull(classLoader.getResourceAsStream(fileNameProvider.getTestFileName()))) {
+        ClassLoader loader = getClass().getClassLoader();
+        try (InputStream is = Objects.requireNonNull(loader.getResourceAsStream(fileNameProvider.getTestFileName()))) {
 
             MappingStrategy<QuestionDto> strategy = new ColumnPositionMappingStrategyBuilder<QuestionDto>().build();
             strategy.setType(QuestionDto.class);
@@ -33,12 +33,7 @@ public class CsvQuestionDao implements QuestionDao {
                     new InputStreamReader(is)).withExceptionHandler(e -> {
                         throw new QuestionReadException(String.format("Ошибка при чтении файла из строки %d",
                                 e.getLineNumber()), e.getCause());
-                    })
-                    .withMappingStrategy(strategy)
-                    .withSeparator(';')
-                    .withSkipLines(1)
-                    .build()
-                    .parse();
+                    }).withMappingStrategy(strategy).withSeparator(';').withSkipLines(1).build().parse();
 
             List<Question> result = new ArrayList<>(parseList.size());
             for (QuestionDto questionDto : parseList) {
