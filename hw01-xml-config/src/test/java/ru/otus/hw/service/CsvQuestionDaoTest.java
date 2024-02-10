@@ -11,11 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Тестирование получения данных из файла")
 public class CsvQuestionDaoTest {
 
-    @DisplayName("Успешное чтение из файла")
+    @DisplayName("Успешное чтение из файла с проверкой количества записей")
     @Test
     void successfulQuestionRead() {
-        CsvQuestionDao dao = new CsvQuestionDao(new AppProperties("questions.csv"));
-        assertDoesNotThrow(dao::findAll);
+        CsvQuestionDao dao = new CsvQuestionDao(new AppProperties("questions-test.csv"));
+        int count = dao.findAll().size();
+        assertEquals(4, count);
     }
 
     @DisplayName("Ошибка чтения файла")
