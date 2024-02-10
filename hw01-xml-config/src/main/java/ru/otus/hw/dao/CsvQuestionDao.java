@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public class CsvQuestionDao implements QuestionDao {
@@ -23,7 +24,7 @@ public class CsvQuestionDao implements QuestionDao {
     @Override
     public List<Question> findAll() {
         ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream is = classLoader.getResourceAsStream(fileNameProvider.getTestFileName())) {
+        try (InputStream is = Objects.requireNonNull(classLoader.getResourceAsStream(fileNameProvider.getTestFileName()))) {
 
             MappingStrategy<QuestionDto> strategy = new ColumnPositionMappingStrategyBuilder<QuestionDto>().build();
             strategy.setType(QuestionDto.class);
