@@ -1,0 +1,5 @@
+# Добавить сюда своих вопросов. Эту строку надо пропустить при настройке CsvToBean (withSkipLines)
+When was Harry Potter born?;July 31, 1980%true|August 31, 1980%false|July 30, 1980%false
+What kind of ghost has never been at Hogwarts?;Drury Lane%true|Peeves%false|Beans%false
+How do I get into Ravenclaw's living room?;Repeat the knock in a certain rhythm%true|Answer the question%false|Password%false
+What is Dumbledore's full name?;Albus Percival Wulfric Brian Dumbledore%true|Albus Percival Valentine Brian Dumbledore%false|Albus Percival Wilburn Brian Dumbledore%false
