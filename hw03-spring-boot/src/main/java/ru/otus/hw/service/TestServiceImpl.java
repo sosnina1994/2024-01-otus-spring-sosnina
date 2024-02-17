@@ -18,7 +18,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public TestResult executeTestFor(Student student) {
         ioService.printLine("");
-        ioService.printLocalized("TestService.excecute.greeting");
+        ioService.printLocalized("TestService.execute.greeting");
         ioService.printLine("");
         var questions = questionDao.findAll();
         var testResult = new TestResult(student);
@@ -28,8 +28,7 @@ public class TestServiceImpl implements TestService {
 
             var answerIdx = ioService.readIntForRangeWithPrompt(0, maxQuestionSize,
                     QuestionStringFormatter.formatQuestion(question),
-                    ioService.getMessage("TestService.excecute.number.format.read.error",
-                            maxQuestionSize));
+                    ioService.getMessage("TestService.execute.number.format.read.error", maxQuestionSize));
             Answer answer = question.answers().get(answerIdx);
 
             var isAnswerValid = answer.isCorrect();
