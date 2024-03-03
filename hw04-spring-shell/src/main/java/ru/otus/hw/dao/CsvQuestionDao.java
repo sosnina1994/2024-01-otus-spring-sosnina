@@ -25,7 +25,8 @@ public class CsvQuestionDao implements QuestionDao {
     @Override
     public List<Question> findAll() {
         ClassLoader loader = getClass().getClassLoader();
-        try (InputStream is = Objects.requireNonNull(loader.getResourceAsStream(fileNameProvider.getTestFileNameByLocaleTag()))) {
+        try (InputStream is = Objects.requireNonNull(
+                loader.getResourceAsStream(fileNameProvider.getTestFileNameByLocaleTag()))) {
 
             MappingStrategy<QuestionDto> strategy = new ColumnPositionMappingStrategyBuilder<QuestionDto>().build();
             strategy.setType(QuestionDto.class);
@@ -43,7 +44,6 @@ public class CsvQuestionDao implements QuestionDao {
                 }
             }
             return result;
-
         } catch (Exception ex) {
             throw new QuestionReadException("Непредвиденная ошибка при чтении файла", ex);
         }
