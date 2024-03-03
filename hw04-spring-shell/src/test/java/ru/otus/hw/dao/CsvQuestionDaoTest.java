@@ -31,7 +31,7 @@ public class CsvQuestionDaoTest {
     @DisplayName("Успешное чтение из файла с проверкой количества записей")
     @Test
     void successfulQuestionRead() {
-        given(appProperties.getTestFileName()).willReturn("questions-test.csv");
+        given(appProperties.getTestFileNameByLocaleTag()).willReturn("questions-test.csv");
         assertThatList(dao.findAll())
                 .isNotNull()
                 .isNotEmpty()
@@ -42,7 +42,7 @@ public class CsvQuestionDaoTest {
     @DisplayName("Ошибка чтения файла")
     @Test
     void getThrowQuestionReadException() {
-        given(appProperties.getTestFileName()).willReturn("test_file_name.csv");
+        given(appProperties.getTestFileNameByLocaleTag()).willReturn("test_file_name.csv");
         assertThrows(QuestionReadException.class, dao::findAll);
     }
 
