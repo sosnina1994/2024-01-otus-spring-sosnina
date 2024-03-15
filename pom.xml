@@ -126,6 +126,7 @@
         <module>hw02-annotation-config</module>
         <module>hw03-spring-boot</module>
         <module>hw04-spring-shell</module>
+        <module>hw05-spring-jdbc</module>
     </modules>
 
 </project>
