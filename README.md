@@ -10,3 +10,4 @@
 - hw04-spring-shell - Домашнее задание №4
 - hw05-spring-jdbc - Домашнее задание №5
 - hw06-spring-jpa - Домашнее задание №6
+- hw07-spring-data-jpa - Домашнее задание №7
