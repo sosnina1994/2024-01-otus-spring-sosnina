@@ -3,7 +3,7 @@ package ru.otus.hw.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.repositories.AuthorRepository;
@@ -41,10 +41,10 @@ public class BookServiceImpl implements BookService {
     public Book create(String title, String authorId, String genreId) {
         var author = authorRepository.findById(authorId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Author with id %d not found".formatted(authorId)));
+                        new NotFoundException("Author with id %d not found".formatted(authorId)));
         var genre = genreRepository.findById(genreId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Genre with id %d not found".formatted(genreId)));
+                        new NotFoundException("Genre with id %d not found".formatted(genreId)));
         var book = new Book(null, title, author, genre);
         return bookRepository.save(book);
     }
@@ -52,14 +52,14 @@ public class BookServiceImpl implements BookService {
     @Transactional
     @Override
     public Book update(String id, String title, String authorId, String genreId) {
-        bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
+        bookRepository.findById(id).orElseThrow(() -> new NotFoundException(
                 "Book with id %d not found".formatted(id)));
 
         var author = authorRepository.findById(authorId)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new NotFoundException(
                         "Author with id %d not found".formatted(authorId)));
         var genre = genreRepository.findById(genreId)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new NotFoundException(
                         "Genre with id %d not found".formatted(genreId)));
         var book = new Book(id, title, author, genre);
         return bookRepository.save(book);
