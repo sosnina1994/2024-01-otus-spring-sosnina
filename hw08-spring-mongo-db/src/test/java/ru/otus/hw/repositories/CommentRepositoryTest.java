@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Comment;
-import ru.otus.hw.repositories.CommentRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -16,7 +16,7 @@ public class BooksCascadeMongoEventListener extends AbstractMongoEventListener<B
     @Override
     public void onBeforeDelete(BeforeDeleteEvent<Book> event) {
         String bookId = String.valueOf(event.getSource().get("_id"));
-        commentRepository.deleteAll(commentRepository.findAllByBookId(bookId));
+        commentRepository.deleteByBookId(bookId);
     }
 
 }
