@@ -1,6 +1,7 @@
 package ru.otus.hw.repositories;
 
 import lombok.val;
+import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Comment;
+
+import java.util.Comparator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -76,7 +79,14 @@ public class CommentRepositoryTest {
         val expectedComment = mongoTemplate.findById(FIRST_COMMENT_ID, Comment.class);
 
         assertThat(optionalActualComment).isPresent().get()
-                .usingRecursiveComparison()
+                .usingRecursiveComparison(comparisonConfiguration())
                 .isEqualTo(expectedComment);
+    }
+
+    private RecursiveComparisonConfiguration comparisonConfiguration() {
+        Comparator<Book> bookComparator = Comparator.comparing(book -> String.valueOf(book.getId()));
+        return RecursiveComparisonConfiguration.builder()
+                .withComparatorForType(bookComparator, Book.class)
+                .build();
     }
 }
