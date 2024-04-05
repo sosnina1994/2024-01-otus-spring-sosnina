@@ -11,3 +11,4 @@
 - hw05-spring-jdbc - Домашнее задание №5
 - hw06-spring-jpa - Домашнее задание №6
 - hw07-spring-data-jpa - Домашнее задание №7
+- hw08-spring-mongo-db - Домашнее задание №8
