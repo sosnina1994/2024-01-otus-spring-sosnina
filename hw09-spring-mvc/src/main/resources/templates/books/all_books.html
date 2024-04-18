@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all books</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books {
+            border: 1px solid steelblue;
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        .books tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .books td:last-child, td:first-child {
+            width: 50px;
+        }
+
+        .margin_bottom {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+<h3>Books:</h3>
+<a href="edit_book.html" th:href="@{/edit_book}">
+    <button class="margin_bottom" type="button">Add new book</button>
+</a>
+<table class="books">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Show comments</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}" th:object="${book}">
+        <form id="delete-book" action="all_books.html" th:method="post"
+              th:action="@{/delete(id=${book.id})}">
+            <td th:text="*{id}">1</td>
+            <td th:text="*{title}">War and piece</td>
+            <td th:text="*{author.fullName}">L. N. Tolstoy</td>
+            <td th:text="*{genre.name}">Classic</td>
+            <td>
+                <a href="comments/book_comments.html"
+                   th:href="@{/book_comments(id=*{id})}">Show comments</a>
+            </td>
+            <td>
+                <a href="edit_book.html" th:href="@{/edit_book(id=*{id})}">Edit</a>
+                <button type="submit">Delete</button>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

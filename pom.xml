@@ -130,6 +130,7 @@
         <module>hw06-spring-jpa</module>
         <module>hw07-spring-data-jpa</module>
         <module>hw08-spring-mongo-db</module>
+        <module>hw09-spring-mvc</module>
     </modules>
 
 </project>
