@@ -7,7 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.hw.dto.*;
-import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.services.AuthorServiceImpl;
 import ru.otus.hw.services.BookServiceImpl;
 import ru.otus.hw.services.GenreServiceImpl;
@@ -68,7 +68,7 @@ class BookControllerTest {
     @Test
     void getNotFoundExceptionByGetting() throws Exception {
         given(bookService.findById(NOT_CONTAIN_BOOK_ID))
-                .willThrow(new EntityNotFoundException(null));
+                .willThrow(new NotFoundException(null));
 
         mvc.perform(get("/edit_book").param("id", String.valueOf(NOT_CONTAIN_BOOK_ID)))
                 .andExpect(status().isNotFound());
