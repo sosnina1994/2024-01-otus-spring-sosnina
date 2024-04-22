@@ -14,6 +14,7 @@ public class ExceptionController {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        ex.printStackTrace();
         return ResponseEntity.badRequest().build();
     }
 }
