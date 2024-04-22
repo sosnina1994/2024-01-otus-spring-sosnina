@@ -83,7 +83,8 @@ class BookControllerTest {
         BookUpdateDto bookUpdateDto = new BookUpdateDto(book.getId(), book.getTitle(),
                 book.getAuthor().getId(), book.getGenre().getId());
 
-        mvc.perform(post("/update_book").flashAttr("book", bookUpdateDto))
+        Long id = 1L;
+        mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
                 .andExpect(redirectedUrl("/"));
     }
 
@@ -92,9 +93,10 @@ class BookControllerTest {
     void getNotFoundExceptionByUpdating() throws Exception {
         BookUpdateDto bookUpdateDto = new BookUpdateDto(null, null,
                 null, null);
+        Long id = 1L;
 
-        mvc.perform(post("/update_book").flashAttr("book", bookUpdateDto))
-                .andExpect(redirectedUrl("/edit_book?id=%d".formatted(null)));
+        mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
+                .andExpect(redirectedUrl("/edit_book?id=%d".formatted(id)));
     }
 
     @DisplayName("Ошибка валидации id автора при создании книги")
@@ -103,8 +105,9 @@ class BookControllerTest {
         BookDto book = getExampleOfBookDto();
         BookUpdateDto bookUpdateDto = new BookUpdateDto(book.getId(), book.getTitle(),
                 null, book.getGenre().getId());
+        Long id = 1L;
 
-        mvc.perform(post("/update_book").flashAttr("book", bookUpdateDto))
+        mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
                 .andExpect(redirectedUrl("/edit_book?id=%d".formatted(book.getId())));
     }
 
@@ -115,7 +118,9 @@ class BookControllerTest {
         BookUpdateDto bookUpdateDto = new BookUpdateDto(book.getId(), book.getTitle(),
                 book.getAuthor().getId(), null);
 
-        mvc.perform(post("/update_book").flashAttr("book", bookUpdateDto))
+        Long id = 1L;
+
+        mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
                 .andExpect(redirectedUrl("/edit_book?id=%d".formatted(book.getId())));
     }
 

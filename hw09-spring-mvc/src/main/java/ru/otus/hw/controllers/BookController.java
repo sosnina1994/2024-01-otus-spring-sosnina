@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.otus.hw.dto.BookCreateDto;
 import ru.otus.hw.dto.BookDto;
 import ru.otus.hw.dto.BookUpdateDto;
@@ -49,11 +50,13 @@ public class BookController {
         return "books/edit_book";
     }
 
-    @PostMapping("/update_book")
-    public String updateBook(@Valid @ModelAttribute("book") BookUpdateDto book,
+    @PostMapping("/book/{id}")
+    public String updateBook(
+            @PathVariable("id") long id,
+            @Valid @ModelAttribute("book") BookUpdateDto book,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/edit_book?id=%d".formatted(book.getId());
+            return "redirect:/edit_book?id=%d".formatted(id);
         }
 
         bookService.update(book);

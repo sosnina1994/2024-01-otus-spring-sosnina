@@ -54,7 +54,7 @@
             <td th:text="*{genre.name}">Classic</td>
             <td>
                 <a href="comments/book_comments.html"
-                   th:href="@{'/books/' + ${book.id} + '/comments'}">Show comments</a>
+                   th:href="@{'/book/' + ${book.id} + '/comments'}">Show comments</a>
             </td>
             <td>
                 <a href="edit_book.html" th:href="@{/book/(id=*{id})}">Edit</a>
