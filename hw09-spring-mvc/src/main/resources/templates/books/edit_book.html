@@ -30,7 +30,7 @@
 
 <!-- Book edition -->
 <form id="edit-form" action="books/edit_book.html"
-      th:action="${book.id == null} ? @{/create_book(id=${book.id})} : @{/update_book(id=${book.id})}"
+      th:action="${book.id == null} ? @{/book/(id=${book.id})} : @{/update_book(id=${book.id})}"
       th:method="post" th:object="${book}">
     <h3>Book Info:</h3>
 

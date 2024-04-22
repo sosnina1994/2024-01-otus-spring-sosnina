@@ -47,7 +47,7 @@ class BookControllerTest {
         BookCreateDto bookCreateDto = new BookCreateDto(null, book.getTitle(), book.getAuthor().getId(),
                 book.getGenre().getId());
 
-        mvc.perform(post("/create_book").flashAttr("book", bookCreateDto))
+        mvc.perform(post("/book/").flashAttr("book", bookCreateDto))
                 .andExpect(redirectedUrl("/"));
     }
 

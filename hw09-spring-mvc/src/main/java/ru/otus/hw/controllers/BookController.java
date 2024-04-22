@@ -61,7 +61,7 @@ public class BookController {
     }
 
 
-    @PostMapping("/create_book")
+    @PostMapping("/book/")
     public String createBook(@Valid @ModelAttribute("book") BookCreateDto book,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
