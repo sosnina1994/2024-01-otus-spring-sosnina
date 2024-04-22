@@ -34,7 +34,7 @@ public class BookController {
         return "books/all_books";
     }
 
-    @GetMapping("/edit_book")
+    @GetMapping("/book/")
     public String editBook(@RequestParam(value = "id", required = false) Long id, Model model) {
         if (id == null) {
             BookCreateDto book = new BookCreateDto(null, null, null, null);

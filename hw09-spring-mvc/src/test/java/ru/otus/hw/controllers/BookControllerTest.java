@@ -60,7 +60,7 @@ class BookControllerTest {
         given(bookService.findById(FIRST_BOOK_ID))
                 .willReturn(bookDto);
 
-        mvc.perform(get("/edit_book").param("id", String.valueOf(FIRST_BOOK_ID)))
+        mvc.perform(get("/book/").param("id", String.valueOf(FIRST_BOOK_ID)))
                 .andExpect(status().isOk());
     }
 
