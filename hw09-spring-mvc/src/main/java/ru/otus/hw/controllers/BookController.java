@@ -68,7 +68,7 @@ public class BookController {
     public String createBook(@Valid @ModelAttribute("book") BookCreateDto book,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/edit_book?id=%d".formatted(book.getId());
+            return "redirect:/add_book?id=%d".formatted(book.getId());
         }
 
         bookService.create(book);
