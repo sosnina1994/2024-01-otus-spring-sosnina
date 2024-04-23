@@ -35,16 +35,19 @@ public class BookController {
         return "books/all_books";
     }
 
-    @GetMapping("/book/")
-    public String editBook(@RequestParam(value = "id", required = false) Long id, Model model) {
-        if (id == null) {
-            BookCreateDto book = new BookCreateDto(null, null, null, null);
-            model.addAttribute("book", book);
-        } else {
-            BookDto book = bookService.findById(id);
-            model.addAttribute("book", BookUpdateDto.fromBookDto(book));
-        }
+    @GetMapping("/book")
+    public String addBook(Model model) {
+        BookCreateDto book = new BookCreateDto(null, null, null, null);
+        model.addAttribute("book", book);
+        model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("genres", genreService.findAll());
+        return "books/add_book";
+    }
 
+    @GetMapping("/book/{id}")
+    public String editBook(@PathVariable(value = "id", required = false) Long id, Model model) {
+        BookDto book = bookService.findById(id);
+        model.addAttribute("book", BookUpdateDto.fromBookDto(book));
         model.addAttribute("authors", authorService.findAll());
         model.addAttribute("genres", genreService.findAll());
         return "books/edit_book";
@@ -64,7 +67,7 @@ public class BookController {
     }
 
 
-    @PostMapping("/book/")
+    @PostMapping("/book")
     public String createBook(@Valid @ModelAttribute("book") BookCreateDto book,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
