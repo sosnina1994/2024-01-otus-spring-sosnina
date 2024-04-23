@@ -47,7 +47,7 @@ class BookControllerTest {
         BookCreateDto bookCreateDto = new BookCreateDto(null, book.getTitle(), book.getAuthor().getId(),
                 book.getGenre().getId());
 
-        mvc.perform(post("/book/").flashAttr("book", bookCreateDto))
+        mvc.perform(post("/book").flashAttr("book", bookCreateDto))
                 .andExpect(redirectedUrl("/"));
     }
 
@@ -60,7 +60,7 @@ class BookControllerTest {
         given(bookService.findById(FIRST_BOOK_ID))
                 .willReturn(bookDto);
 
-        mvc.perform(get("/book/").param("id", String.valueOf(FIRST_BOOK_ID)))
+        mvc.perform(get("/book/{id}", FIRST_BOOK_ID))
                 .andExpect(status().isOk());
     }
 
