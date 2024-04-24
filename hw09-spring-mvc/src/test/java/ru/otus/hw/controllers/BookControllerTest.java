@@ -44,7 +44,7 @@ class BookControllerTest {
     @Test
     void saveNewBook() throws Exception {
         BookDto book = getExampleOfBookDto();
-        BookCreateDto bookCreateDto = new BookCreateDto(null, book.getTitle(), book.getAuthor().getId(),
+        BookCreateDto bookCreateDto = new BookCreateDto(book.getTitle(), book.getAuthor().getId(),
                 book.getGenre().getId());
 
         mvc.perform(post("/book").flashAttr("book", bookCreateDto))
@@ -70,7 +70,7 @@ class BookControllerTest {
         given(bookService.findById(NOT_CONTAIN_BOOK_ID))
                 .willThrow(new NotFoundException(null));
 
-        mvc.perform(get("/edit_book").param("id", String.valueOf(NOT_CONTAIN_BOOK_ID)))
+        mvc.perform(get("/book/").param("id", String.valueOf(NOT_CONTAIN_BOOK_ID)))
                 .andExpect(status().isNotFound());
     }
 
@@ -96,7 +96,7 @@ class BookControllerTest {
         Long id = 1L;
 
         mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
-                .andExpect(redirectedUrl("/edit_book?id=%d".formatted(id)));
+                .andExpect(redirectedUrl("/book/1"));
     }
 
     @DisplayName("Ошибка валидации id автора при создании книги")
@@ -108,7 +108,7 @@ class BookControllerTest {
         Long id = 1L;
 
         mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
-                .andExpect(redirectedUrl("/edit_book?id=%d".formatted(book.getId())));
+                .andExpect(redirectedUrl("/book/1"));
     }
 
     @DisplayName("Ошибка валидации id жанра при создании книги")
@@ -121,7 +121,7 @@ class BookControllerTest {
         Long id = 1L;
 
         mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
-                .andExpect(redirectedUrl("/edit_book?id=%d".formatted(book.getId())));
+                .andExpect(redirectedUrl("/book/1"));
     }
 
     @DisplayName("Удаление книги по id")

@@ -37,7 +37,7 @@ public class BookController {
 
     @GetMapping("/book")
     public String addBook(Model model) {
-        BookCreateDto book = new BookCreateDto(null, null, null, null);
+        BookCreateDto book = new BookCreateDto(null, null, null);
         model.addAttribute("book", book);
         model.addAttribute("authors", authorService.findAll());
         model.addAttribute("genres", genreService.findAll());
@@ -59,7 +59,7 @@ public class BookController {
             @Valid @ModelAttribute("book") BookUpdateDto book,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/edit_book?id=%d".formatted(id);
+            return "redirect:/book/" + id;
         }
 
         bookService.update(book);
@@ -71,7 +71,7 @@ public class BookController {
     public String createBook(@Valid @ModelAttribute("book") BookCreateDto book,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/add_book?id=%d".formatted(book.getId());
+            return "redirect:/add_book";
         }
 
         bookService.create(book);
