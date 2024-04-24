@@ -7,7 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.hw.dto.*;
-import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.services.AuthorServiceImpl;
 import ru.otus.hw.services.BookServiceImpl;
 import ru.otus.hw.services.GenreServiceImpl;
@@ -44,10 +44,10 @@ class BookControllerTest {
     @Test
     void saveNewBook() throws Exception {
         BookDto book = getExampleOfBookDto();
-        BookCreateDto bookCreateDto = new BookCreateDto(null, book.getTitle(), book.getAuthor().getId(),
+        BookCreateDto bookCreateDto = new BookCreateDto(book.getTitle(), book.getAuthor().getId(),
                 book.getGenre().getId());
 
-        mvc.perform(post("/create_book").flashAttr("book", bookCreateDto))
+        mvc.perform(post("/book").flashAttr("book", bookCreateDto))
                 .andExpect(redirectedUrl("/"));
     }
 
@@ -60,7 +60,7 @@ class BookControllerTest {
         given(bookService.findById(FIRST_BOOK_ID))
                 .willReturn(bookDto);
 
-        mvc.perform(get("/edit_book").param("id", String.valueOf(FIRST_BOOK_ID)))
+        mvc.perform(get("/book/{id}", FIRST_BOOK_ID))
                 .andExpect(status().isOk());
     }
 
@@ -68,9 +68,9 @@ class BookControllerTest {
     @Test
     void getNotFoundExceptionByGetting() throws Exception {
         given(bookService.findById(NOT_CONTAIN_BOOK_ID))
-                .willThrow(new EntityNotFoundException(null));
+                .willThrow(new NotFoundException(null));
 
-        mvc.perform(get("/edit_book").param("id", String.valueOf(NOT_CONTAIN_BOOK_ID)))
+        mvc.perform(get("/book/").param("id", String.valueOf(NOT_CONTAIN_BOOK_ID)))
                 .andExpect(status().isNotFound());
     }
 
@@ -83,7 +83,8 @@ class BookControllerTest {
         BookUpdateDto bookUpdateDto = new BookUpdateDto(book.getId(), book.getTitle(),
                 book.getAuthor().getId(), book.getGenre().getId());
 
-        mvc.perform(post("/update_book").flashAttr("book", bookUpdateDto))
+        Long id = 1L;
+        mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
                 .andExpect(redirectedUrl("/"));
     }
 
@@ -92,9 +93,10 @@ class BookControllerTest {
     void getNotFoundExceptionByUpdating() throws Exception {
         BookUpdateDto bookUpdateDto = new BookUpdateDto(null, null,
                 null, null);
+        Long id = 1L;
 
-        mvc.perform(post("/update_book").flashAttr("book", bookUpdateDto))
-                .andExpect(redirectedUrl("/edit_book?id=%d".formatted(null)));
+        mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
+                .andExpect(redirectedUrl("/book/1"));
     }
 
     @DisplayName("Ошибка валидации id автора при создании книги")
@@ -103,9 +105,10 @@ class BookControllerTest {
         BookDto book = getExampleOfBookDto();
         BookUpdateDto bookUpdateDto = new BookUpdateDto(book.getId(), book.getTitle(),
                 null, book.getGenre().getId());
+        Long id = 1L;
 
-        mvc.perform(post("/update_book").flashAttr("book", bookUpdateDto))
-                .andExpect(redirectedUrl("/edit_book?id=%d".formatted(book.getId())));
+        mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
+                .andExpect(redirectedUrl("/book/1"));
     }
 
     @DisplayName("Ошибка валидации id жанра при создании книги")
@@ -115,8 +118,10 @@ class BookControllerTest {
         BookUpdateDto bookUpdateDto = new BookUpdateDto(book.getId(), book.getTitle(),
                 book.getAuthor().getId(), null);
 
-        mvc.perform(post("/update_book").flashAttr("book", bookUpdateDto))
-                .andExpect(redirectedUrl("/edit_book?id=%d".formatted(book.getId())));
+        Long id = 1L;
+
+        mvc.perform(post("/book/{id}", id).flashAttr("book", bookUpdateDto))
+                .andExpect(redirectedUrl("/book/1"));
     }
 
     @DisplayName("Удаление книги по id")

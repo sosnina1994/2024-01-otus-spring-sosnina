@@ -28,18 +28,12 @@
 </head>
 <body>
 
-<!-- Book edition -->
-<form id="edit-form" action="books/edit_book.html"
-      th:action="@{'/book/' + ${book.id}}"
-
+<!-- Book saving -->
+<form id="add-form" action="books/add_book.html"
+      th:action="@{/book}"
       th:method="post" th:object="${book}">
 
     <h3>Book Info:</h3>
-
-    <div class="row">
-        <label for="id-input">ID:</label>
-        <input id="id-input" type="text" readonly="readonly" value="1" th:value="*{id}"/>
-    </div>
 
     <div class="row">
         <label for="book-title-input">Title:</label>
@@ -75,8 +69,5 @@
         </a>
     </div>
 </form>
-
-
-
 </body>
 </html>

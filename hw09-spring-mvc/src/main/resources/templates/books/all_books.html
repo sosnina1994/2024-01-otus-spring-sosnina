@@ -30,7 +30,7 @@
 </head>
 <body>
 <h3>Books:</h3>
-<a href="edit_book.html" th:href="@{/edit_book}">
+<a th:href="@{/book}">
     <button class="margin_bottom" type="button">Add new book</button>
 </a>
 <table class="books">
@@ -54,10 +54,10 @@
             <td th:text="*{genre.name}">Classic</td>
             <td>
                 <a href="comments/book_comments.html"
-                   th:href="@{/book_comments(id=*{id})}">Show comments</a>
+                   th:href="@{'/book/' + ${book.id} + '/comments'}">Show comments</a>
             </td>
             <td>
-                <a href="edit_book.html" th:href="@{/edit_book(id=*{id})}">Edit</a>
+                <a href="edit_book.html" th:href="@{/book/{id}(id=*{id})}">Edit</a>
                 <button type="submit">Delete</button>
             </td>
         </form>

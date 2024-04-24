@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.CommentDto;
-import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.mappers.CommentMapper;
 import ru.otus.hw.models.Comment;
 import ru.otus.hw.repositories.BookRepository;
@@ -26,8 +26,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDto findById(Long id) {
         return commentMapper.toDto(commentRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Comment with id = %d is not found")));
+                .orElseThrow(() -> new NotFoundException("Comment with id = %d is not found")));
     }
 
     @Transactional(readOnly = true)
@@ -42,8 +41,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDto create(String text, Long bookId) {
         var book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Book with id %d not found".formatted(bookId)));
+                .orElseThrow(() -> new NotFoundException("Book with id %d not found".formatted(bookId)));
         var comment = new Comment(null, text, book);
         return commentMapper.toDto(commentRepository.save(comment));
     }
@@ -51,9 +49,8 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public CommentDto update(Long id, String text) {
-        Comment currentComment = commentRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(
-                        "Comment with id %d not found".formatted(id)));
+        Comment currentComment = commentRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Comment with id %d not found".formatted(id)));
 
         currentComment.setText(text);
         return commentMapper.toDto(commentRepository.save(currentComment));
