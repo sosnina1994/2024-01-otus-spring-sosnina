@@ -8,7 +8,6 @@ import ru.otus.hw.dto.CommentDto;
 import ru.otus.hw.dto.CommentUpdateDto;
 import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.mappers.CommentMapper;
-import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Comment;
 import ru.otus.hw.repositories.BookRepository;
 import ru.otus.hw.repositories.CommentRepository;
@@ -54,11 +53,21 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public CommentDto update(CommentUpdateDto dto) {
-        Book book = bookRepository.findById(dto.getBookId())
+        Comment comment = commentRepository.findById(dto.getId())
                 .orElseThrow(() -> new NotFoundException(
-                        "Book with id %d not found".formatted(dto.getBookId())));
-        return commentMapper.toDto(commentRepository.save(
-                commentMapper.toModel(dto, book)));
+                        "Comment with id %d not found".formatted(dto.getId())));
+
+        if (dto.getText() != null && !dto.getText().isBlank()) {
+            comment.setText(dto.getText());
+        }
+
+        if (dto.getBookId() != null) {
+            comment.setBook(bookRepository.findById(dto.getBookId())
+                    .orElseThrow(() -> new NotFoundException(
+                            "Book with id %d not found".formatted(dto.getBookId()))));
+        }
+
+        return commentMapper.toDto(commentRepository.save(comment));
     }
 
     @Transactional
