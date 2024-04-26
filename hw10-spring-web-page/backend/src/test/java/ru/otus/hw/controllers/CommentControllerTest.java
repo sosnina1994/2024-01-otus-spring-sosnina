@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.hw.dto.CommentCreateDto;
 import ru.otus.hw.dto.CommentDto;
 import ru.otus.hw.dto.CommentUpdateDto;
-import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.services.CommentServiceImpl;
 
 import java.util.List;
@@ -52,7 +52,7 @@ class CommentControllerTest {
     @DisplayName("Ошибка получения комментариев книги")
     @Test
     void getCommentsByBookIdWithException() throws Exception {
-        given(commentService.findAllForBook(any())).willThrow(EntityNotFoundException.class);
+        given(commentService.findAllForBook(any())).willThrow(NotFoundException.class);
 
         mvc.perform(get("/api/books/%d/comments".formatted(FIRST_BOOK_ID)))
                 .andExpect(status().isNotFound());
@@ -73,7 +73,7 @@ class CommentControllerTest {
     @DisplayName("Ошибка получения комментария по идентификатору")
     @Test
     void getCommentWithException() throws Exception {
-        given(commentService.findById(any())).willThrow(EntityNotFoundException.class);
+        given(commentService.findById(any())).willThrow(NotFoundException.class);
 
         mvc.perform(get("/api/comments/%d".formatted(FIRST_COMMENT_ID)))
                 .andExpect(status().isNotFound());
@@ -144,7 +144,7 @@ class CommentControllerTest {
     @DisplayName("Ошибка получения комментария, который требуется обновить")
     @Test
     void getNotFoundExceptionByUpdating() throws Exception {
-        given(commentService.update(any())).willThrow(EntityNotFoundException.class);
+        given(commentService.update(any())).willThrow(NotFoundException.class);
 
         CommentDto dto = getExampleOfCommentDto();
         CommentUpdateDto updateDto = new CommentUpdateDto(dto.getId(), dto.getText(), dto.getBookId());

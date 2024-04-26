@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.hw.dto.*;
-import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.services.AuthorServiceImpl;
 import ru.otus.hw.services.BookServiceImpl;
 import ru.otus.hw.services.GenreServiceImpl;
@@ -72,7 +72,7 @@ class BookControllerTest {
     @Test
     void getNotFoundException() throws Exception {
         given(bookService.findById(any()))
-                .willThrow(EntityNotFoundException.class);
+                .willThrow(NotFoundException.class);
 
         mvc.perform(get("/api/books/%d".formatted(FIRST_BOOK_ID)))
                 .andExpect(status().isNotFound());
@@ -144,7 +144,7 @@ class BookControllerTest {
     @DisplayName("Обновление несуществующей книги")
     @Test
     void getNotFoundExceptionByUpdating() throws Exception {
-        given(bookService.update(any())).willThrow(EntityNotFoundException.class);
+        given(bookService.update(any())).willThrow(NotFoundException.class);
 
         BookDto bookDto = getExampleOfBookDto();
         BookUpdateDto bookUpdateDto = new BookUpdateDto(bookDto.getId(), bookDto.getTitle(),
