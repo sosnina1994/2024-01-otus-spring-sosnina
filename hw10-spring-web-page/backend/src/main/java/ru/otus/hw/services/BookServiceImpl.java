@@ -63,19 +63,27 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto update(BookUpdateDto bookDto) {
         final Long id = bookDto.getId();
+        final String title = bookDto.getTitle();
         final Long authorId = bookDto.getAuthorId();
         final Long genreId = bookDto.getGenreId();
 
-        bookRepository.findById(id).orElseThrow(() -> new NotFoundException(
-                "Book with id %d not found".formatted(id)));
+        var book = bookRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Book with id %d not found".formatted(id)));
 
-        var author = authorRepository.findById(authorId)
-                .orElseThrow(() -> new NotFoundException(
-                        "Author with id %d not found".formatted(authorId)));
-        var genre = genreRepository.findById(genreId)
-                .orElseThrow(() -> new NotFoundException(
-                        "Genre with id %d not found".formatted(genreId)));
-        var book = bookMapper.toModel(bookDto, author, genre);
+        if (title != null) {
+            book.setTitle(title);
+        }
+
+        if (authorId != null) {
+            book.setAuthor(authorRepository.findById(authorId)
+                    .orElseThrow(() -> new NotFoundException("Author with id %d not found".formatted(authorId))));
+        }
+
+        if (genreId != null) {
+            book.setGenre(genreRepository.findById(genreId)
+                    .orElseThrow(() -> new NotFoundException("Genre with id %d not found".formatted(genreId))));
+        }
+
         return bookMapper.toDto(bookRepository.save(book));
     }
 
