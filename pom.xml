@@ -131,6 +131,7 @@
         <module>hw07-spring-data-jpa</module>
         <module>hw08-spring-mongo-db</module>
         <module>hw09-spring-mvc</module>
+        <module>hw10-spring-web-page</module>
     </modules>
 
 </project>

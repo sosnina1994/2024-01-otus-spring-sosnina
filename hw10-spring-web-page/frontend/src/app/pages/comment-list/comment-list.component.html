@@ -1,0 +1,39 @@
+<h3>Comments for book {{book.title}}</h3><br>
+
+<button mat-raised-button color="primary" (click)="goToCreateComment()">
+  Create new comment
+</button><br/><br/>
+<table mat-table [dataSource]="comments" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Comment ID</th>
+    <td mat-cell *matCellDef="let element">{{element.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="text">
+    <th mat-header-cell *matHeaderCellDef>Text</th>
+    <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="horizontal-content">
+        <button mat-raised-button color="primary" (click)="goToEditComment(element)">
+          Edit
+        </button>
+        <button mat-raised-button color="warn" (click)="deleteComment(element)">
+          Delete
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<br>
+<div class="horizontal-content">
+  <button class="button" mat-raised-button (click)="goToBookList()">Back to book list</button>
+</div>
