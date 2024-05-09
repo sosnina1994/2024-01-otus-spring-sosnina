@@ -1,0 +1,22 @@
+spring:
+  data:
+    mongodb:
+      port: 27017
+      database: courses
+      host: localhost
+      uri: mongodb://localhost:27017
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 4.0.2
+
+mongock:
+  runner-type: applicationrunner
+  change-logs-scan-package:
+    - ru.otus.hw.mongock.changelog
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
