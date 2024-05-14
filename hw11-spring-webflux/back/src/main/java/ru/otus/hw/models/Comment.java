@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 @Getter
 @Setter
@@ -23,10 +24,11 @@ public class Comment {
     private String text;
 
     @NotNull
+    @DBRef(lazy = true)
     private Book book;
 
     @PersistenceCreator
-    public Comment(String id, @NotNull String text, Book book) {
+    public Comment(String id, @NotNull String text, @NotNull Book book) {
         this.id = id;
         this.text = text;
         this.book = book;
