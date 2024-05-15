@@ -15,3 +15,4 @@
 - hw09-spring-mvc - Домашнее задание №9
 - hw10-spring-web-page - Домашнее задание №10
 - hw11-spring-webflux - Домашнее задание №11
+- hw12-spring-form-auth - Домашнее задание №12
