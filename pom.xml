@@ -134,6 +134,7 @@
         <module>hw10-spring-web-page</module>
         <module>hw11-spring-webflux</module>
         <module>hw12-spring-form-auth</module>
+        <module>hw13-spring-authorization</module>
     </modules>
 
 </project>
