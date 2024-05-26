@@ -8,13 +8,13 @@ import ru.otus.hw.dto.BookUpdateDto;
 import java.util.List;
 
 public interface BookService {
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     BookDto findById(Long id);
 
     @PreAuthorize("hasRole('USER')")
     List<BookDto> findAll();
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     BookDto create(BookCreateDto bookDto);
 
     @PreAuthorize("hasRole('ADMIN')")

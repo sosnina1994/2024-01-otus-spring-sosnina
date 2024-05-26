@@ -11,9 +11,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.hw.dto.*;
 import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.security.SecurityConfiguration;
-import ru.otus.hw.services.AuthorServiceImpl;
-import ru.otus.hw.services.BookServiceImpl;
-import ru.otus.hw.services.GenreServiceImpl;
+import ru.otus.hw.services.AuthorService;
+import ru.otus.hw.services.BookService;
+import ru.otus.hw.services.GenreService;
 
 import javax.sql.*;
 import java.util.List;
@@ -41,13 +41,13 @@ class BookControllerTest {
     private DataSource dataSource;
 
     @MockBean
-    private BookServiceImpl bookService;
+    private BookService bookService;
 
     @MockBean
-    private AuthorServiceImpl authorService;
+    private AuthorService authorService;
 
     @MockBean
-    private GenreServiceImpl genreService;
+    private GenreService genreService;
 
     @DisplayName("Редирект на страницу login")
     @Test
@@ -59,8 +59,8 @@ class BookControllerTest {
 
     @DisplayName("Добавление новой книги")
     @WithMockUser(
-            username = "user",
-            authorities = {"ROLE_USER"}
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
     )
     @Test
     void saveNewBook() throws Exception {
@@ -74,7 +74,7 @@ class BookControllerTest {
                 .andExpect(redirectedUrl("/"));
     }
 
-    @DisplayName("Ошибку аутентификации для добавления новой книги")
+    @DisplayName("Ошибку аутентификации для получении книг")
     @Test
     void saveBookWith401() throws Exception {
         mvc.perform(get("/book"))
@@ -83,8 +83,8 @@ class BookControllerTest {
 
     @DisplayName("Получение книги по идентификатору")
     @WithMockUser(
-            username = "user",
-            authorities = {"ROLE_USER"}
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
     )
     @Test
     void getBookById() throws Exception {
@@ -115,8 +115,8 @@ class BookControllerTest {
 
     @DisplayName("Обновление книги")
     @WithMockUser(
-            username = "user",
-            authorities = {"ROLE_USER"}
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
     )
     @Test
     void updateBook() throws Exception {
@@ -141,8 +141,8 @@ class BookControllerTest {
 
     @DisplayName("Ошибка валидации id автора при создании книги")
     @WithMockUser(
-            username = "user",
-            authorities = {"ROLE_USER"}
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
     )
     @Test
     void getValidIdAuthorException() throws Exception {
@@ -157,8 +157,8 @@ class BookControllerTest {
 
     @DisplayName("Ошибка валидации id жанра при создании книги")
     @WithMockUser(
-            username = "user",
-            authorities = {"ROLE_USER"}
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
     )
     @Test
     void getValidIGenreException() throws Exception {
@@ -173,8 +173,8 @@ class BookControllerTest {
     }
 
     @WithMockUser(
-            username = "user",
-            authorities = {"ROLE_USER"}
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
     )
     @DisplayName("Удаление книги по id")
     @Test

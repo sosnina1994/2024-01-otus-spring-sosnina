@@ -1,24 +1,26 @@
 package ru.otus.hw.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.otus.hw.dto.BookDto;
 import ru.otus.hw.dto.CommentDto;
-import ru.otus.hw.services.BookServiceImpl;
-import ru.otus.hw.services.CommentServiceImpl;
+import ru.otus.hw.services.BookService;
+import ru.otus.hw.services.CommentService;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class CommentController {
-    private final CommentServiceImpl commentService;
+    private final CommentService commentService;
 
-    private final BookServiceImpl bookService;
+    private final BookService bookService;
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/book/{id}/comments")
     public String getCommentsForBook(@PathVariable("id") long id, Model model) {
         BookDto book = bookService.findById(id);

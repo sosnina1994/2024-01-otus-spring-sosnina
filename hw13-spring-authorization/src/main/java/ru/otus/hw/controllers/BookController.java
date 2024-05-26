@@ -2,6 +2,7 @@ package ru.otus.hw.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,22 +14,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import ru.otus.hw.dto.BookCreateDto;
 import ru.otus.hw.dto.BookDto;
 import ru.otus.hw.dto.BookUpdateDto;
-import ru.otus.hw.services.AuthorServiceImpl;
-import ru.otus.hw.services.BookServiceImpl;
-import ru.otus.hw.services.GenreServiceImpl;
+import ru.otus.hw.services.AuthorService;
+import ru.otus.hw.services.BookService;
+import ru.otus.hw.services.GenreService;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class BookController {
-    private final BookServiceImpl bookService;
+    private final BookService bookService;
 
-    private final AuthorServiceImpl authorService;
+    private final AuthorService authorService;
 
-    private final GenreServiceImpl genreService;
+    private final GenreService genreService;
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public String allBooksList(Model model) {
         List<BookDto> books = bookService.findAll();
         model.addAttribute("books", books);
@@ -36,6 +38,7 @@ public class BookController {
     }
 
     @GetMapping("/book")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addBook(Model model) {
         BookCreateDto book = new BookCreateDto(null, null, null);
         model.addAttribute("book", book);
@@ -45,6 +48,7 @@ public class BookController {
     }
 
     @GetMapping("/book/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String editBook(@PathVariable(value = "id", required = false) Long id, Model model) {
         BookDto book = bookService.findById(id);
         model.addAttribute("book", BookUpdateDto.fromBookDto(book));
@@ -54,6 +58,7 @@ public class BookController {
     }
 
     @PostMapping("/book/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String updateBook(
             @PathVariable("id") long id,
             @Valid @ModelAttribute("book") BookUpdateDto book,
@@ -68,6 +73,7 @@ public class BookController {
 
 
     @PostMapping("/book")
+    @PreAuthorize("hasRole('ADMIN')")
     public String createBook(@Valid @ModelAttribute("book") BookCreateDto book,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -79,6 +85,7 @@ public class BookController {
     }
 
     @PostMapping("/delete")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteBook(@RequestParam("id") long id, Model model) {
         bookService.deleteById(id);
         return "redirect:/";
