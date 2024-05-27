@@ -1,0 +1,18 @@
+spring:
+  data:
+    mongodb:
+      port: 27017
+      database: batch-example
+      host: localhost
+  datasource:
+    url: jdbc:h2:mem:maindb
+  sql:
+    init:
+      mode: always
+      data-locations: data.sql
+      schema-locations: schema.sql
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
