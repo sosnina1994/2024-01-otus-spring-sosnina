@@ -18,4 +18,5 @@
 - hw12-spring-form-auth - Домашнее задание №12
 - hw13-spring-authorization - Домашнее задание №13
 - hw14-spring-batch - Домашнее задание №14
+- hw15-spring-integration - Домашнее задание №15
 - hw16-spring-actuator - Домашнее задание №16
