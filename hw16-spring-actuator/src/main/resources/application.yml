@@ -1,0 +1,41 @@
+spring:
+  messages:
+    encoding: UTF-8
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    logfile:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health
+        exclude: "caches-cache"
+      base-path: "/metrics"
+  health:
+    diskspace:
+      enabled: true
+    defaults:
+      enabled: true
+
+logging:
+  level:
+    ROOT: INFO
+  file:
+    name: "hw16-log"
