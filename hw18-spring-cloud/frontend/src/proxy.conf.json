@@ -1,0 +1,20 @@
+{
+  "/api/**": {
+    "methods": ["POST", "GET", "PATCH", "DELETE", "PUT"],
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/books/**": {
+    "methods": ["POST", "GET", "PATCH", "DELETE", "PUT"],
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/comments/**": {
+    "methods": ["POST", "GET", "PATCH", "DELETE", "PUT"],
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

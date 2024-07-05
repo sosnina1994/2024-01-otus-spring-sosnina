@@ -139,6 +139,7 @@
         <module>hw15-spring-integration</module>
         <module>hw16-spring-actuator</module>
         <module>hw17-docker</module>
+        <module>hw18-spring-cloud</module>
     </modules>
 
 </project>

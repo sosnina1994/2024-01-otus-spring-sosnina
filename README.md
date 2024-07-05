@@ -21,3 +21,4 @@
 - hw15-spring-integration - Домашнее задание №15
 - hw16-spring-actuator - Домашнее задание №16
 - hw17-docker - Домашнее задание №17
+- hw18-spring-cloud - Домашнее задание №18
