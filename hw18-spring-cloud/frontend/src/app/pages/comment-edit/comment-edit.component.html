@@ -1,0 +1,25 @@
+<div class="content">
+  <mat-form-field>
+    <mat-label>Comment ID</mat-label>
+    <input matInput type="text" readonly="true" [(ngModel)]="comment.id">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Text</mat-label>
+    <input matInput type="text" [(ngModel)]="comment.text">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Book</mat-label>
+    <mat-select [(ngModel)]="comment.bookId">
+      <mat-option *ngFor="let book of books"
+                  [value]="book.id">{{book.title}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="horizontal-content">
+  <button class="button" mat-raised-button color="primary" (click)="saveComment()">Save</button>
+  <p>     </p>
+  <button class="button" mat-raised-button color="warn" (click)="goToBookList()">Home</button>
+</div>

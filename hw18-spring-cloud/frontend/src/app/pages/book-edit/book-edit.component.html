@@ -1,0 +1,32 @@
+
+<div class="content">
+  <mat-form-field>
+    <mat-label>Book ID</mat-label>
+    <input matInput type="text" readonly="true" [(ngModel)]="book.id">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput type="text" [(ngModel)]="book.title">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Author</mat-label>
+    <mat-select [(ngModel)]="book.author">
+      <mat-option *ngFor="let author of authors"
+                  [value]="author">{{author.fullName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Genre</mat-label>
+    <mat-select [(ngModel)]="book.genre">
+      <mat-option *ngFor="let genre of genres" [value]="genre">{{genre.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="horizontal-content">
+  <button class="button" mat-raised-button color="primary" (click)="saveBook()">Save</button>
+  <button class="button" mat-raised-button (click)="goToBookList()">Back to book list</button>
+</div>
