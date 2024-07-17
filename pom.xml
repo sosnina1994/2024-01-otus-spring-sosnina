@@ -140,6 +140,7 @@
         <module>hw16-spring-actuator</module>
         <module>hw17-docker</module>
         <module>hw18-spring-cloud</module>
+        <module>final-project</module>
     </modules>
 
 </project>

@@ -1,0 +1,54 @@
+spring:
+  messages:
+    encoding: UTF-8
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+logging:
+  level:
+    ROOT: INFO
+
+
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        register-health-indicator: true
+        slidingWindowSize: 3
+        permittedNumberOfCallsInHalfOpenState: 3
+        slowCallDurationThreshold: 2s
+        slowCallRateThreshold: 10
+        failureRateThreshold: 3
+        waitDurationInOpenState: 2s
+        minimumNumberOfCalls: 3
+management:
+  endpoint:
+    health:
+      show-details: always
+    logfile:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "caches-cache"
+  health:
+    circuitbreakers:
+      enabled: true
+    diskspace:
+      enabled: true
+    defaults:
+      enabled: true
