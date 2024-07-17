@@ -13,14 +13,11 @@ spring:
     generate-ddl: false
     hibernate:
       ddl-auto: none
-
     show-sql: true
 
 logging:
   level:
     ROOT: INFO
-
-
 
 resilience4j:
   circuitbreaker:
