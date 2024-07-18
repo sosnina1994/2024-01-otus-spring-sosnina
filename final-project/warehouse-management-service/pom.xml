@@ -131,7 +131,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <excludes>**/generated/**/*</excludes>
+                    <excludes>**/generated-sources/**/*</excludes>
                     <configLocation>${checkstyle.config.url}</configLocation>
                 </configuration>
                 <executions>
