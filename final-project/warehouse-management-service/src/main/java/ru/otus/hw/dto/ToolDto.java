@@ -16,7 +16,7 @@ public class ToolDto {
 
     private ToolBrandDto brand;
 
-    private Integer count;
+    private Integer balance;
 
     private Integer minBalance;
 

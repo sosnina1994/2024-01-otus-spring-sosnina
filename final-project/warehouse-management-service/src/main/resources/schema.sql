@@ -19,7 +19,7 @@ create table if not exists tools
     designation varchar(255),
     type_id     bigint references tool_types (id),
     brand_id    bigint references tool_brands (id),
-    count       int,
-    minBalance  int,
+    balance     int,
+    min_balance int,
     primary key (id)
 );

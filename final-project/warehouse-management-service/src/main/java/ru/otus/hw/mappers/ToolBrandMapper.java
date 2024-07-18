@@ -7,7 +7,7 @@ import ru.otus.hw.dto.ToolBrandDto;
 import ru.otus.hw.models.ToolBrand;
 
 @Mapper(componentModel = "spring")
-public interface ManufacturerMapper {
+public interface ToolBrandMapper {
     ToolBrandDto mapToDto(ToolBrand manufacturer);
 
     @Mapping(target = "id", ignore = true)

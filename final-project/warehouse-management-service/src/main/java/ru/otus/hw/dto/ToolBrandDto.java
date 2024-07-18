@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 public class ToolBrandDto {
     private Long id;
 
-    @NotBlank(message = "Tool type name can not be null")
-    @Size(min = 2, max = 100, message = "Tool type name must be with size from 2 to 100 symbols")
+    @NotBlank(message = "Tool brand name can not be null")
+    @Size(min = 2, max = 100, message = "Tool brand name must be with size from 2 to 100 symbols")
     private String name;
 }
