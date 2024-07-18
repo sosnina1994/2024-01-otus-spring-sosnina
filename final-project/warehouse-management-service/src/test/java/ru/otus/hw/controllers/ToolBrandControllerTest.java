@@ -18,9 +18,9 @@ import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@DisplayName("Тестирование контроллера типов инструмента")
-@WebMvcTest(ToolTypeController.class)
-class ToolTypeControllerTest {
+@DisplayName("Тестирование контроллера брендов инструмента")
+@WebMvcTest(ToolBrandController.class)
+class ToolBrandControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -29,29 +29,29 @@ class ToolTypeControllerTest {
     private ObjectMapper mapper;
 
     @MockBean
-    private ToolTypeService toolTypeService;
+    private ToolBrandService brandService;
 
     @Test
-    @DisplayName("Сохранение нового типа инструмента")
+    @DisplayName("Сохранение нового бренда инструмента")
     void create() throws Exception {
-        var toolTypeDto = getExampleOfToolTypeDto();
-        var createDto = new ToolTypeDto(toolTypeDto.getId(), toolTypeDto.getName());
+        var toolBrandDto = getExampleOfToolBrandDto();
+        var createDto = new ToolBrandDto(toolBrandDto.getId(), toolBrandDto.getName());
 
-        given(toolTypeService.create(any())).willReturn(toolTypeDto);
-        mvc.perform(post("/api/tool-types")
+        given(brandService.create(any())).willReturn(toolBrandDto);
+        mvc.perform(post("/api/tool-brands")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(createDto)))
                 .andExpect(status().isCreated())
-                .andExpect(content().json(mapper.writeValueAsString(toolTypeDto)));
+                .andExpect(content().json(mapper.writeValueAsString(toolBrandDto)));
 
     }
 
-    @DisplayName("Ошибка сохранения типа инструмента (с невалидным текстом)")
+    @DisplayName("Ошибка сохранения бренда инструмента (с невалидным текстом)")
     @Test
     void getNotValidException() throws Exception {
         var createDto = new ToolTypeDto(null, null);
 
-        mvc.perform(post("/api/tool-types")
+        mvc.perform(post("/api/tool-brands")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(createDto)))
                 .andExpect(status().isBadRequest());
@@ -60,21 +60,21 @@ class ToolTypeControllerTest {
     @Test
     @DisplayName("Получение списка типов инструмента")
     void getAll() throws Exception {
-        List<ToolTypeDto> exampleList = getExampleToolTypes();
+        List<ToolBrandDto> exampleList = getExampleToolBrands();
 
-        given(toolTypeService.findAll()).willReturn(exampleList);
-        mvc.perform(get("/api/tool-types"))
+        given(brandService.findAll()).willReturn(exampleList);
+        mvc.perform(get("/api/tool-brands"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(exampleList)));
     }
 
-    private ToolTypeDto getExampleOfToolTypeDto() {
-        return new ToolTypeDto(1L, "ТЕСТ");
+    private ToolBrandDto getExampleOfToolBrandDto() {
+        return new ToolBrandDto(1L, "ТЕСТ");
     }
 
-    private List<ToolTypeDto> getExampleToolTypes() {
+    private List<ToolBrandDto> getExampleToolBrands() {
         return LongStream.range(1L, 4L).boxed()
-                .map(id -> new ToolTypeDto(id, "ТЕСТ %d".formatted(id)))
+                .map(id -> new ToolBrandDto(id, "ТЕСТ %d".formatted(id)))
                 .toList();
     }
 }

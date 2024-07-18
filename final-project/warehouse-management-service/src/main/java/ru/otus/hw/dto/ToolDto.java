@@ -14,7 +14,7 @@ public class ToolDto {
 
     private ToolTypeDto type;
 
-    private ManufacturerDto manufacturer;
+    private ToolBrandDto brand;
 
     private Integer count;
 

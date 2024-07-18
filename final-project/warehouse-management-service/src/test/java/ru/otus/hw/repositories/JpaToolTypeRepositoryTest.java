@@ -1,11 +1,10 @@
-package ru.otus.hw.services;
+package ru.otus.hw.repositories;
 
 import lombok.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.autoconfigure.orm.jpa.*;
 import ru.otus.hw.models.*;
-import ru.otus.hw.repositories.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -15,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("JPA-Репозиторий для работы с типами инструмента")
 @DataJpaTest
-class ToolTypeServiceImpTest {
+class JpaToolTypeRepositoryTest {
 
     @Autowired
     private ToolTypeRepository toolTypeRepository;
