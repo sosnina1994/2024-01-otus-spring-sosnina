@@ -19,6 +19,7 @@
     <properties>
         <java.version>17</java.version>
         <mapsrtuct.version>1.5.5.Final</mapsrtuct.version>
+        <springdoc.version>2.0.3</springdoc.version>
         <resilience4j.version>3.1.1</resilience4j.version>
         <resilience4j.springboot.version>2.2.0</resilience4j.springboot.version>
         <checkstyle-plugin.version>3.2.2</checkstyle-plugin.version>
@@ -72,6 +73,12 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapsrtuct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <dependency>
