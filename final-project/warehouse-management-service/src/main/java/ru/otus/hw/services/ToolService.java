@@ -10,7 +10,7 @@ public interface ToolService {
 
     ToolDto create(ToolCreateDto toolCreateDto);
 
-    ToolDto update(Long id, ToolUpdateDto bookDto);
+    ToolDto update(Long id, ToolUpdateDto toolUpdateDto);
 
     List<ToolDto> findAll();
 

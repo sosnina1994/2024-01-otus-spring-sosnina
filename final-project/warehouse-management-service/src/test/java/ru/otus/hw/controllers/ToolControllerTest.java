@@ -5,26 +5,35 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.autoconfigure.web.servlet.*;
 import org.springframework.boot.test.mock.mockito.*;
+import org.springframework.context.annotation.*;
 import org.springframework.http.*;
+import org.springframework.security.test.context.support.*;
 import org.springframework.test.web.servlet.*;
+import ru.otus.hw.configs.*;
 import ru.otus.hw.dto.*;
 import ru.otus.hw.exceptions.*;
 import ru.otus.hw.services.*;
 
+import javax.sql.*;
 import java.util.*;
 import java.util.stream.*;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("Тестирование контроллера инструментов")
 @WebMvcTest(ToolController.class)
+@Import(SecurityConfig.class)
 class ToolControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @MockBean
+    private DataSource dataSource;
 
     @Autowired
     private ObjectMapper mapper;
@@ -39,7 +48,19 @@ class ToolControllerTest {
     private ToolBrandService toolBrandService;
 
 
+    @DisplayName("Редирект на страницу login")
     @Test
+    void redirectToLoginPage() throws Exception {
+        mvc.perform(get("/")
+                        .with(csrf()))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @DisplayName("Сохранение нового инструмента")
     void create() throws Exception {
         var toolDto = getExampleTool();
@@ -54,6 +75,7 @@ class ToolControllerTest {
 
         given(toolService.create(any())).willReturn(toolDto);
         mvc.perform(post("/api/tools")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(toolCreateDto)))
                 .andExpect(status().isCreated())
@@ -62,6 +84,10 @@ class ToolControllerTest {
     }
 
     @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @DisplayName("Сохранение нового инструмента c невалидным типом")
     void create_withInvalidType() throws Exception {
         var toolDto = getExampleTool();
@@ -77,12 +103,17 @@ class ToolControllerTest {
         given(toolService.create(any())).willReturn(toolDto);
 
         mvc.perform(post("/api/tools")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(toolCreateDto)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @DisplayName("Сохранение нового инструмента c невалидным брендом")
     void create_withInvalidBrand() throws Exception {
         var toolDto = getExampleTool();
@@ -98,12 +129,17 @@ class ToolControllerTest {
         given(toolService.create(any())).willReturn(toolDto);
 
         mvc.perform(post("/api/tools")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(toolCreateDto)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @DisplayName("Обновление инструмента")
     void update() throws Exception {
         var tool = getExampleTool();
@@ -112,6 +148,7 @@ class ToolControllerTest {
         given(toolService.update(any(), any())).willReturn(tool);
 
         mvc.perform(patch("/api/tools/%d".formatted(tool.getId()))
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(toolUpdateDto)))
                 .andExpect(status().isAccepted())
@@ -119,6 +156,10 @@ class ToolControllerTest {
     }
 
     @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @DisplayName("Обновление инструмента c несуществующим идентификатором")
     void update_withNotFound() throws Exception {
         var tool = getExampleTool();
@@ -127,12 +168,17 @@ class ToolControllerTest {
         given(toolService.update(any(), any())).willThrow(NotFoundException.class);
 
         mvc.perform(patch("/api/tools/%d".formatted(tool.getId()))
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(toolUpdateDto)))
                 .andExpect(status().isNotFound());
     }
 
     @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @DisplayName("Получение списка инструментов")
     void getAll() throws Exception {
         List<ToolDto> exampleList = getExampleTools();
@@ -144,6 +190,10 @@ class ToolControllerTest {
     }
 
     @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @DisplayName("Получение инструмента по идентификатору")
     void getById() throws Exception {
         var tool = getExampleTool();
@@ -156,6 +206,10 @@ class ToolControllerTest {
     }
 
     @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @DisplayName("Получение инструмента c несуществующим идентификатором")
     void getById_withNotFound() throws Exception {
         var tool = getExampleTool();
