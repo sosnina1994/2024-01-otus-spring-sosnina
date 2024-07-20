@@ -3,6 +3,7 @@ package ru.otus.hw.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,12 +24,14 @@ public class ToolController {
     private final ToolService toolService;
 
     @PostMapping("/api/tools")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(value = HttpStatus.CREATED)
     public ToolDto create(@Valid @RequestBody ToolCreateDto toolCreateDto) {
         return toolService.create(toolCreateDto);
     }
 
     @PatchMapping("/api/tools/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public ToolDto update(@PathVariable("id") Long id,
                           @Valid @RequestBody ToolUpdateDto toolUpdateDto) {
@@ -36,11 +39,13 @@ public class ToolController {
     }
 
     @GetMapping("/api/tools")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public List<ToolDto> getAll() {
         return toolService.findAll();
     }
 
     @GetMapping("/api/tools/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ToolDto getById(@PathVariable(value = "id") Long id) {
         return toolService.findById(id);
     }
