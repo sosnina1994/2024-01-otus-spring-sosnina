@@ -11,7 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +40,4 @@ public class Tool {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
     private ToolBrand toolBrand;
-
-    private Integer balance;
-
-    @Column(name = "min_balance")
-    private Integer minBalance;
 }

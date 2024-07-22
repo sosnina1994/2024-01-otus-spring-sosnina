@@ -68,10 +68,7 @@ class ToolControllerTest {
                 toolDto.getName(),
                 toolDto.getDesignation(),
                 toolDto.getType().getId(),
-                toolDto.getBrand().getId(),
-                toolDto.getBalance(),
-                toolDto.getMinBalance()
-        );
+                toolDto.getBrand().getId());
 
         given(toolService.create(any())).willReturn(toolDto);
         mvc.perform(post("/api/tools")
@@ -95,9 +92,7 @@ class ToolControllerTest {
                 toolDto.getName(),
                 toolDto.getDesignation(),
                 null,
-                toolDto.getBrand().getId(),
-                toolDto.getBalance(),
-                toolDto.getMinBalance()
+                toolDto.getBrand().getId()
         );
 
         given(toolService.create(any())).willReturn(toolDto);
@@ -121,9 +116,7 @@ class ToolControllerTest {
                 toolDto.getName(),
                 toolDto.getDesignation(),
                 toolDto.getType().getId(),
-                null,
-                toolDto.getBalance(),
-                toolDto.getMinBalance()
+                null
         );
 
         given(toolService.create(any())).willReturn(toolDto);
@@ -133,45 +126,6 @@ class ToolControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(toolCreateDto)))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @WithMockUser(
-            username = "admin",
-            authorities = {"ROLE_ADMIN"}
-    )
-    @DisplayName("Обновление инструмента")
-    void update() throws Exception {
-        var tool = getExampleTool();
-        var toolUpdateDto = new ToolUpdateDto(10, 10);
-
-        given(toolService.update(any(), any())).willReturn(tool);
-
-        mvc.perform(patch("/api/tools/%d".formatted(tool.getId()))
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(toolUpdateDto)))
-                .andExpect(status().isAccepted())
-                .andExpect(content().json(mapper.writeValueAsString(tool)));
-    }
-
-    @Test
-    @WithMockUser(
-            username = "admin",
-            authorities = {"ROLE_ADMIN"}
-    )
-    @DisplayName("Обновление инструмента c несуществующим идентификатором")
-    void update_withNotFound() throws Exception {
-        var tool = getExampleTool();
-        var toolUpdateDto = new ToolUpdateDto(10, 10);
-
-        given(toolService.update(any(), any())).willThrow(NotFoundException.class);
-
-        mvc.perform(patch("/api/tools/%d".formatted(tool.getId()))
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(toolUpdateDto)))
-                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -223,7 +177,7 @@ class ToolControllerTest {
     private List<ToolDto> getExampleTools() {
         return LongStream.range(1L, 4L).boxed()
                 .map(id -> new ToolDto(id, "name %d".formatted(id), "designation %d".formatted(id),
-                        new ToolTypeDto(id, "type"), new ToolBrandDto(id, "brand"), 10, 10))
+                        new ToolTypeDto(id, "type"), new ToolBrandDto(id, "brand")))
                 .toList();
     }
 
@@ -233,7 +187,6 @@ class ToolControllerTest {
 
         return new ToolDto(1L, "TEST", "TEST",
                 toolTypeService.findAll().get(0),
-                toolBrandService.findAll().get(0),
-                10, 10);
+                toolBrandService.findAll().get(0));
     }
 }

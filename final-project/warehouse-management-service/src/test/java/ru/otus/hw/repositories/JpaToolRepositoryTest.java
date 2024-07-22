@@ -50,7 +50,7 @@ class JpaToolRepositoryTest {
     void save() {
         val toolType = entityManager.find(ToolType.class, 1);
         val toolBrand = entityManager.find(ToolBrand.class, 1);
-        val tool = new Tool(null, "TEST", "TEST", toolType, toolBrand, 10, 10);
+        val tool = new Tool(null, "TEST", "TEST", toolType, toolBrand);
         entityManager.merge(tool);
 
         toolRepository.save(tool);
@@ -68,7 +68,7 @@ class JpaToolRepositoryTest {
     void update() {
         val toolType = entityManager.find(ToolType.class, 1);
         val toolBrand = entityManager.find(ToolBrand.class, 1);
-        val expectedTool = new Tool(1L, "TEST", "TEST", toolType, toolBrand, 10, 10);
+        val expectedTool = new Tool(1L, "TEST", "TEST", toolType, toolBrand);
 
         var currentTool = entityManager.find(Tool.class, expectedTool.getId());
 

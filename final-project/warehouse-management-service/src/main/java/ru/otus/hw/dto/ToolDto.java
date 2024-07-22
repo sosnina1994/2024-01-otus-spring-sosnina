@@ -16,9 +16,5 @@ public class ToolDto {
 
     private ToolBrandDto brand;
 
-    private Integer balance;
-
-    private Integer minBalance;
-
 }
 

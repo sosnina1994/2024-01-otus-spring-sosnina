@@ -8,9 +8,9 @@ values ('БРЕНД_1'),
        ('БРЕНД_2'),
        ('БРЕНД_3');
 
-insert into tools(name, designation, type_id, brand_id, balance, min_balance)
-values ('ИНСТРУМЕНТ_1', 'МАРКИРОВКА_1', 1, 1, 20, 20),
-       ('ИНСТРУМЕНТ_2', 'МАРКИРОВКА_2', 2, 2, 10, 10);
+insert into tools(name, designation, type_id, brand_id)
+values ('ИНСТРУМЕНТ_1', 'МАРКИРОВКА_1', 1, 1),
+       ('ИНСТРУМЕНТ_2', 'МАРКИРОВКА_2', 2, 2);
 
 insert into users(username, password, enabled)
 values ('user', '93e74353855c4cfc1b68b3732f81e1f6e73896eddfe705cbbf74c0e7c2034b8dc110d84be216bd48cbacce84a240c54e',

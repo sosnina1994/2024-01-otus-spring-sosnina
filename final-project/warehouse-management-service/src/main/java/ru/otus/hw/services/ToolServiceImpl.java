@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.ToolCreateDto;
 import ru.otus.hw.dto.ToolDto;
-import ru.otus.hw.dto.ToolUpdateDto;
 import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.mappers.ToolMapper;
 import ru.otus.hw.repositories.ToolRepository;
@@ -39,18 +38,6 @@ public class ToolServiceImpl implements ToolService {
                 .orElseThrow(() -> new NotFoundException("Tool brand with id %d not found".formatted(brandId)));
 
         var tool = toolMapper.mapToModel(toolDto, toolType, toolBrand);
-        return toolMapper.mapToDto(toolRepository.save(tool));
-    }
-
-    @Override
-    @Transactional
-    public ToolDto update(Long id, ToolUpdateDto toolUpdateDto) {
-        var tool = toolRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Toll with id %d not found".formatted(id)));
-
-        tool.setBalance(toolUpdateDto.getBalance());
-        tool.setMinBalance(toolUpdateDto.getMinBalance());
-
         return toolMapper.mapToDto(toolRepository.save(tool));
     }
 

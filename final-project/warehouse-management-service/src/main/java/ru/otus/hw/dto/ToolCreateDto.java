@@ -2,7 +2,6 @@ package ru.otus.hw.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.AllArgsConstructor;
@@ -25,14 +24,6 @@ public class ToolCreateDto {
 
     @NotNull(message = "Brand id must be specified")
     private Long brandId;
-
-    @NotNull(message = "Balance must be specified")
-    @PositiveOrZero(message = "Balance must be positive")
-    private Integer balance;
-
-    @NotNull(message = "Minimal balance must be specified")
-    @PositiveOrZero(message = "Minimal balance must be positive")
-    private Integer minBalance;
 
 }
 
