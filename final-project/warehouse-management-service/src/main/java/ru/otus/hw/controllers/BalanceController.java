@@ -22,7 +22,7 @@ public class BalanceController {
         return balanceService.getByToolId(id);
     }
 
-    @GetMapping("/api/tool-balances/")
+    @GetMapping("/api/tool-balances")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public List<ToolBalanceDto> getAll() {
         return balanceService.findAll();
