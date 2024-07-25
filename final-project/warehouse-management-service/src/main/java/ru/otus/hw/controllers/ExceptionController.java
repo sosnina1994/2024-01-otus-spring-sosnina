@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.otus.hw.exceptions.NotFoundException;
+import ru.otus.hw.exceptions.InvalidDataException;
 
 import java.util.List;
 import java.util.Arrays;
@@ -20,6 +21,13 @@ public class ExceptionController {
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public String handleEntityNotFoundEx(NotFoundException ex) {
+        log.warn(ex.getMessage());
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(InvalidDataException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public String handleInvalidDataEx(InvalidDataException ex) {
         log.warn(ex.getMessage());
         return ex.getMessage();
     }
