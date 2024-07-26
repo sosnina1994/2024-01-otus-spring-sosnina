@@ -1,5 +1,7 @@
 package ru.otus.hw.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,9 +20,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "ToolController", description = "АПИ для управления инструментами")
 public class ToolController {
     private final ToolService toolService;
 
+    @Operation(description = "Создание нового инструмента")
     @PostMapping("/api/tools")
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -28,12 +32,15 @@ public class ToolController {
         return toolService.create(toolCreateDto);
     }
 
+
+    @Operation(description = "Получение списка инструментов")
     @GetMapping("/api/tools")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public List<ToolDto> getAll() {
         return toolService.findAll();
     }
 
+    @Operation(description = "Получение инструмента по идентификатору")
     @GetMapping("/api/tools/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ToolDto getById(@PathVariable(value = "id") Long id) {
