@@ -1,6 +1,7 @@
 package ru.otus.hw.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import ru.otus.hw.services.ToolIssueService;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "ToolIssueController", description = "АПИ для управления выдачей инструментов")
 public class ToolIssueController {
     private final ToolIssueService toolIssueService;
 

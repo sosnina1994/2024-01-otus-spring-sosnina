@@ -46,8 +46,8 @@ public class ToolIssueServiceImpl implements ToolIssueService {
 
         val act = mapToAct(toolIssueCreateDto, toolBalance);
 
-        val issueToolAct = issueActRepository.save(act);
-        return issueToolMapper.mapToDto(issueToolAct);
+        val toolIssueAct = issueActRepository.save(act);
+        return issueToolMapper.mapToDto(toolIssueAct);
     }
 
     private ToolIssueAct mapToAct(ToolIssueCreateDto toolIssueCreateDto, ToolBalance balance) {
