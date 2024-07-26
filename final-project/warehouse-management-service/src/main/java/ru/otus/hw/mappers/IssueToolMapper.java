@@ -1,17 +1,18 @@
 package ru.otus.hw.mappers;
 
+import org.mapstruct.Mapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mappings;
-import org.mapstruct.Mapping;
-import ru.otus.hw.dto.ToolArrivalDto;
-import ru.otus.hw.models.ToolArrivalAct;
+import ru.otus.hw.dto.ToolIssueDto;
+import ru.otus.hw.models.ToolIssueAct;
 
 @Mapper(componentModel = "spring")
-public interface ToolArrivalMapper {
+public interface IssueToolMapper {
+
     @Mappings({
             @Mapping(target = "toolDto", source = "tool"),
             @Mapping(target = "toolDto.type", source = "tool.toolType"),
             @Mapping(target = "toolDto.brand", source = "tool.toolBrand")
     })
-    ToolArrivalDto mapToDto(ToolArrivalAct toolArrivalAct);
+    ToolIssueDto mapToDto(ToolIssueAct toolIssueAct);
 }

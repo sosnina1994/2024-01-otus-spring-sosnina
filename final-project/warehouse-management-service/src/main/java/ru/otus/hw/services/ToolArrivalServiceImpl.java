@@ -18,6 +18,7 @@ import ru.otus.hw.repositories.ToolArrivalRepository;
 public class ToolArrivalServiceImpl implements ToolArrivalService {
 
     private final ToolBalanceRepository toolBalanceRepository;
+
     private final ToolArrivalRepository toolArrivalRepository;
 
     private final ToolArrivalMapper toolArrivalMapper;

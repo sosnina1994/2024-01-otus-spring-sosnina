@@ -9,21 +9,13 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class ToolIssueDto {
+public class ToolArrivalDto {
 
     private Long id;
 
-    private String routCardNumber;
-
-    private String productCipher;
-
-    private String operationNumber;
+    private String orderNumber;
 
     private ToolDto toolDto;
 
     private Integer count;
-
-    private String workplaceNumber;
-
-    private String employeeName;
 }

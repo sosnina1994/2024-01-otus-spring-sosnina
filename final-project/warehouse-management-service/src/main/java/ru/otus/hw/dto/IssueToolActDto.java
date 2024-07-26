@@ -1,17 +1,25 @@
 package ru.otus.hw.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-@Data
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Accessors(chain = true)
-public class ToolIssueDto {
+public class IssueToolActDto {
 
     private Long id;
+
+    private ToolDto tool;
+
+    private Integer count;
 
     private String routCardNumber;
 
@@ -19,11 +27,10 @@ public class ToolIssueDto {
 
     private String operationNumber;
 
-    private ToolDto toolDto;
-
-    private Integer count;
-
     private String workplaceNumber;
 
     private String employeeName;
+
+    private LocalDateTime create;
+
 }

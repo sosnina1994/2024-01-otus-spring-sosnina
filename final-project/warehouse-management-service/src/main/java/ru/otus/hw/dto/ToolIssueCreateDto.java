@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class ToolIssueDto {
+public class ToolIssueCreateDto {
 
     private Long id;
 
@@ -19,7 +19,7 @@ public class ToolIssueDto {
 
     private String operationNumber;
 
-    private ToolDto toolDto;
+    private Long toolId;
 
     private Integer count;
 
