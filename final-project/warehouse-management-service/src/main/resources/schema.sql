@@ -31,6 +31,28 @@ create table if not exists tool_balances
     primary key (id)
 );
 
+create table if not exists issue_reports
+(
+    id                bigserial,
+    tool_id           bigint references tools (id),
+    count             int,
+    route_card_number varchar(255),
+    product_cipher    varchar(255),
+    operation_number  varchar(255),
+    workplace_number  varchar(255),
+    employee_name     varchar(255),
+    create_at         timestamp,
+    primary key (id)
+);
+
+create table if not exists arrival_reports
+(
+    id          bigserial,
+    order_number varchar(255),
+    tool_id     bigint references tools (id),
+    count       int,
+    primary key (id)
+);
 
 create table if not exists users
 (
@@ -50,22 +72,3 @@ create table if not exists authorities
 
 create unique index ix_auth_username on authorities (username, authority);
 
-create table if not exists issues
-(
-    id                bigserial,
-    route_card_number varchar(255),
-    product_cipher    varchar(255),
-    operation_number  varchar(255),
-    issue_date        timestamp,
-    workplace_number  varchar(255),
-    employee_name     varchar(255),
-    primary key (id)
-);
-
-create table if not exists tool_issues
-(
-    issue_id bigint references issues (id),
-    tool_id  bigint references tools (id),
-
-    primary key (issue_id, tool_id)
-);
