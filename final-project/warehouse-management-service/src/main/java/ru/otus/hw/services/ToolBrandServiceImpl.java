@@ -1,9 +1,11 @@
 package ru.otus.hw.services;
 
+import lombok.val;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.ToolBrandDto;
+import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.mappers.ToolBrandMapper;
 import ru.otus.hw.repositories.ToolBrandRepository;
 
@@ -24,6 +26,14 @@ public class ToolBrandServiceImpl implements ToolBrandService {
                 .stream()
                 .map(toolBrandMapper::mapToDto)
                 .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public ToolBrandDto findById(Long id) {
+        val toolType = toolBrandRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Tool brand with id = %d is not found".formatted(id)));
+        return toolBrandMapper.mapToDto(toolType);
     }
 
     @Override
