@@ -14,8 +14,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ToolArrivalCreateDto {
 
-    private Long id;
-
     @NotBlank(message = "Order number can not be null or empty")
     private String orderNumber;
 

@@ -1,6 +1,7 @@
 package ru.otus.hw.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import ru.otus.hw.services.ToolArrivalService;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "ToolArrivalController", description = "АПИ для управления прибытием инструментов")
 public class ToolArrivalController {
 
     private final ToolArrivalService toolArrivalService;
