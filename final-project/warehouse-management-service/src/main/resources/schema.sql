@@ -47,10 +47,11 @@ create table if not exists issue_reports
 
 create table if not exists arrival_reports
 (
-    id          bigserial,
+    id           bigserial,
     order_number varchar(255),
-    tool_id     bigint references tools (id),
-    count       int,
+    tool_id      bigint references tools (id),
+    count        int,
+    create_at    timestamp,
     primary key (id)
 );
 
