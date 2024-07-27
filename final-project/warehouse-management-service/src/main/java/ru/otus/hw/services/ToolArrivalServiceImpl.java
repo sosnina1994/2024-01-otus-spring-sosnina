@@ -11,7 +11,7 @@ import ru.otus.hw.mappers.ToolArrivalMapper;
 import ru.otus.hw.models.ToolArrivalAct;
 import ru.otus.hw.models.ToolBalance;
 import ru.otus.hw.repositories.ToolBalanceRepository;
-import ru.otus.hw.repositories.ToolArrivalRepository;
+import ru.otus.hw.repositories.ToolArrivalActRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class ToolArrivalServiceImpl implements ToolArrivalService {
 
     private final ToolBalanceRepository toolBalanceRepository;
 
-    private final ToolArrivalRepository toolArrivalRepository;
+    private final ToolArrivalActRepository toolArrivalActRepository;
 
     private final ToolArrivalMapper toolArrivalMapper;
 
@@ -39,7 +39,7 @@ public class ToolArrivalServiceImpl implements ToolArrivalService {
 
         val act = mapToAct(toolArrivalCreateDto, toolBalance);
 
-        val toolArrivalAct = toolArrivalRepository.save(act);
+        val toolArrivalAct = toolArrivalActRepository.save(act);
         return toolArrivalMapper.mapToDto(toolArrivalAct);
     }
 
