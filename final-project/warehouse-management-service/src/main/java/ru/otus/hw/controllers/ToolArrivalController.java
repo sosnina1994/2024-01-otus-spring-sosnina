@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,6 +22,7 @@ public class ToolArrivalController {
     private final ToolArrivalService toolArrivalService;
 
     @Operation(description = "Приход инструмента")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/api/tool-arrivals")
     @ResponseStatus(value = HttpStatus.CREATED)
     public ToolArrivalDto save(@Valid @RequestBody ToolArrivalCreateDto toolArrivalCreateDto) {
