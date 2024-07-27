@@ -29,7 +29,7 @@
       выдачи инструментов
     * **[ToolIssueActController](src/main/java/ru/otus/hw/controllers/ToolIssueActController.java)** - контроллер
       отчетов выдачи инструментов
-* Service
+* Services
     * **[ToolTypeService](src/main/java/ru/otus/hw/services/ToolTypeService.java)** - интерфейс сервиса управления
       типами инструментов
     * **[ToolTypeServiceImp](src/main/java/ru/otus/hw/services/ToolTypeServiceImp.java)** - реализация интерфейса
@@ -62,3 +62,17 @@
       управления актами списания инструментов
     * **[ToolIssueActServiceImpl](src/main/java/ru/otus/hw/services/ToolIssueActServiceImpl.java)** - реализация
       интерфейса сервиса управления актами списания инструментов
+* Repositories
+    * **[ToolTypeRepository](src/main/java/ru/otus/hw/repositories/ToolTypeRepository.java)** - JPA-репозиторий типов
+      инструментов
+    * **[ToolBrandRepository](src/main/java/ru/otus/hw/repositories/ToolBrandRepository.java)** - JPA-репозиторий
+      брендов (производителей) инструментов
+    * **[ToolRepository](src/main/java/ru/otus/hw/repositories/ToolRepository.java)** - JPA-репозиторий инструментов
+    * **[ToolBalanceRepository](src/main/java/ru/otus/hw/repositories/ToolBalanceRepository.java)** - JPA-репозиторий
+      баланса инструментов
+    * **[ToolArrivalActRepository](src/main/java/ru/otus/hw/repositories/ToolArrivalActRepository.java)** -
+      JPA-репозиторий актов поступления инструментов
+    * **[ToolIssueActRepository](src/main/java/ru/otus/hw/repositories/ToolIssueActRepository.java)** -
+      JPA-репозиторий актов списания инструментов
+    * **[UserRepository](src/main/java/ru/otus/hw/repositories/UserRepository.java)** - JPA-репозиторий пользователей
+
