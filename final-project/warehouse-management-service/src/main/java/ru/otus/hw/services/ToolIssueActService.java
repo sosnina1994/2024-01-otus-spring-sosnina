@@ -1,11 +1,11 @@
 package ru.otus.hw.services;
 
-import ru.otus.hw.dto.IssueToolActDto;
+import ru.otus.hw.dto.ToolIssueActDto;
 
 import java.util.List;
 
 public interface ToolIssueActService {
-    List<IssueToolActDto> findAll();
+    List<ToolIssueActDto> findAll();
 
-    IssueToolActDto findById(Long id);
+    ToolIssueActDto findById(Long id);
 }

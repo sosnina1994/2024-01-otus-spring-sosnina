@@ -4,9 +4,9 @@ import lombok.val;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.hw.dto.IssueToolActDto;
-import ru.otus.hw.mappers.ToolMapper;
-import ru.otus.hw.models.ToolIssueAct;
+import ru.otus.hw.dto.ToolIssueActDto;
+import ru.otus.hw.exceptions.NotFoundException;
+import ru.otus.hw.mappers.ToolIssueActMapper;
 import ru.otus.hw.repositories.ToolIssueActRepository;
 
 import java.util.List;
@@ -18,40 +18,23 @@ public class ToolIssueActServiceImpl implements ToolIssueActService {
 
     private final ToolIssueActRepository repository;
 
-    private final ToolMapper toolMapper;
+    private final ToolIssueActMapper toolIssueActMapper;
 
     @Override
     @Transactional(readOnly = true)
-    public List<IssueToolActDto> findAll() {
+    public List<ToolIssueActDto> findAll() {
         val entities = repository.findAll();
-        return mapToDto(entities);
+        val toolIssueActs = new ArrayList<ToolIssueActDto>();
+        entities.forEach(entity -> toolIssueActs.add(toolIssueActMapper.mapToDto(entity)));
+
+        return toolIssueActs;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public IssueToolActDto findById(Long id) {
-        val entity = repository.findById(id);
-        return mapToDto(entity.stream().toList()).get(0);
-    }
-
-
-    private List<IssueToolActDto> mapToDto(List<ToolIssueAct> entities) {
-        val list = new ArrayList<IssueToolActDto>();
-        entities.forEach(entity -> {
-            val dto = new IssueToolActDto()
-                    .setId(entity.getId())
-                    .setTool(toolMapper.mapToDto(entity.getTool()))
-                    .setCount(entity.getCount())
-                    .setRoutCardNumber(entity.getRoutCardNumber())
-                    .setProductCipher(entity.getProductCipher())
-                    .setOperationNumber(entity.getOperationNumber())
-                    .setWorkplaceNumber(entity.getWorkplaceNumber())
-                    .setEmployeeName(entity.getEmployeeName())
-                    .setCreate(entity.getCreate());
-            list.add(dto);
-        });
-
-
-        return list;
+    public ToolIssueActDto findById(Long id) {
+        val entity = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Tool issue act with id %d not found".formatted(id)));
+        return toolIssueActMapper.mapToDto(entity);
     }
 }

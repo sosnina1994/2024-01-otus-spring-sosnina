@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class IssueToolActDto {
+public class ToolIssueActDto {
 
     private Long id;
 
-    private ToolDto tool;
+    private ToolDto toolDto;
 
     private Integer count;
 
