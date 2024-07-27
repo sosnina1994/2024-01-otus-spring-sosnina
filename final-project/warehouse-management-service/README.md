@@ -83,3 +83,20 @@
     * **[ToolArrivalAct](src/main/java/ru/otus/hw/models/ToolArrivalAct.java)** - модель акта получения инструмента
     * **[ToolIssueAct](src/main/java/ru/otus/hw/models/ToolIssueAct.java)** - модель акта выдачи инструмента
     * **[User](src/main/java/ru/otus/hw/models/User.java)** - модель пользователя
+* DTOs
+    * **[ToolTypeDto](src/main/java/ru/otus/hw/dto/ToolTypeDto.java)** - DTO типа инструмента
+    * **[ToolBrandDto](src/main/java/ru/otus/hw/dto/ToolBrandDto.java)** - DTO бренда (производителя) инструмента
+    * **[ToolDto](src/main/java/ru/otus/hw/dto/ToolDto.java)** - DTO инструмента
+    * **[ToolCreateDto](src/main/java/ru/otus/hw/dto/ToolCreateDto.java)** - DTO создания инструмента
+    * **[ToolBalanceDto](src/main/java/ru/otus/hw/dto/ToolBalanceDto.java)** - DTO баланса инструмента
+    * **[ToolBalanceCreateDto](src/main/java/ru/otus/hw/dto/ToolBalanceCreateDto.java)** - DTO создания баланса
+      инструмента
+    * **[ToolArrivalDto](src/main/java/ru/otus/hw/dto/ToolArrivalDto.java)** - DTO поступления инструмента
+    * **[ToolArrivalActDto](src/main/java/ru/otus/hw/dto/ToolArrivalActDto.java)** - DTO акта поступления инструмента
+    * **[ToolArrivalCreateDto](src/main/java/ru/otus/hw/dto/ToolArrivalCreateDto.java)** - DTO создания акта поступления
+      инструмента
+    * **[ToolIssueDto](src/main/java/ru/otus/hw/dto/ToolIssueDto.java)** - DTO выдачи инструмента
+    * **[ToolIssueActDto](src/main/java/ru/otus/hw/dto/ToolIssueActDto.java)** - DTO акта выдачи инструмента
+    * **[ToolIssueCreateDto](src/main/java/ru/otus/hw/dto/ToolIssueCreateDto.java)** - DTO создания акта выдачи
+      инструмента
+    * **[UserDto](src/main/java/ru/otus/hw/dto/UserDto.java)** - DTO пользователя
