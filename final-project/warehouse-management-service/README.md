@@ -75,4 +75,11 @@
     * **[ToolIssueActRepository](src/main/java/ru/otus/hw/repositories/ToolIssueActRepository.java)** -
       JPA-репозиторий актов списания инструментов
     * **[UserRepository](src/main/java/ru/otus/hw/repositories/UserRepository.java)** - JPA-репозиторий пользователей
-
+* Models
+    * **[ToolType](src/main/java/ru/otus/hw/models/ToolType.java)** - модель типа инструмента
+    * **[ToolBrand](src/main/java/ru/otus/hw/models/ToolBrand.java)** - модель бренда (производителя) инструмента
+    * **[Tool](src/main/java/ru/otus/hw/models/Tool.java)** - модель инструмента
+    * **[ToolBalance](src/main/java/ru/otus/hw/models/ToolBalance.java)** - модель баланса инструмента
+    * **[ToolArrivalAct](src/main/java/ru/otus/hw/models/ToolArrivalAct.java)** - модель акта получения инструмента
+    * **[ToolIssueAct](src/main/java/ru/otus/hw/models/ToolIssueAct.java)** - модель акта выдачи инструмента
+    * **[User](src/main/java/ru/otus/hw/models/User.java)** - модель пользователя
