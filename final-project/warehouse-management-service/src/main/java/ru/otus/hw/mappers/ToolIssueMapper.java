@@ -7,7 +7,7 @@ import ru.otus.hw.dto.ToolIssueDto;
 import ru.otus.hw.models.ToolIssueAct;
 
 @Mapper(componentModel = "spring")
-public interface IssueToolMapper {
+public interface ToolIssueMapper {
 
     @Mappings({
             @Mapping(target = "toolDto", source = "tool"),

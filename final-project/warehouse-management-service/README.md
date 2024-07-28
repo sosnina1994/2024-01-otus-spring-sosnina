@@ -100,3 +100,16 @@
     * **[ToolIssueCreateDto](src/main/java/ru/otus/hw/dto/ToolIssueCreateDto.java)** - DTO создания акта выдачи
       инструмента
     * **[UserDto](src/main/java/ru/otus/hw/dto/UserDto.java)** - DTO пользователя
+* Mappers
+    * **[ToolTypeMapper](src/main/java/ru/otus/hw/mappers/ToolTypeMapper.java)** - картограф типа инструмента
+    * **[ToolBrandMapper](src/main/java/ru/otus/hw/mappers/ToolBrandMapper.java)** - картограф бренда инструмента
+    * **[ToolMapper](src/main/java/ru/otus/hw/mappers/ToolMapper.java)** - картограф инструмента
+    * **[ToolBalanceMapper](src/main/java/ru/otus/hw/mappers/ToolBalanceMapper.java)** - картограф баланса инструмента
+    * **[ToolArrivalMapper](src/main/java/ru/otus/hw/mappers/ToolArrivalMapper.java)** - картограф поступления
+      инструмента
+    * **[ToolArrivalActMapper](src/main/java/ru/otus/hw/mappers/ToolArrivalActMapper.java)** - картограф акта
+      поступления инструмента
+    * **[ToolIssueMapper](src/main/java/ru/otus/hw/mappers/ToolIssueMapper.java)** - картограф выдачи инструмента
+    * **[ToolIssueActMapper](src/main/java/ru/otus/hw/mappers/ToolIssueActMapper.java)** - картограф акта выдачи
+      инструмента
+    * **[UserMapper](src/main/java/ru/otus/hw/mappers/UserMapper.java)** - картограф пользователей

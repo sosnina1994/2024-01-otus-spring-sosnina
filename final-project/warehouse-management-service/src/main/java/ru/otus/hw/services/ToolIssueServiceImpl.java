@@ -8,7 +8,7 @@ import ru.otus.hw.dto.ToolIssueCreateDto;
 import ru.otus.hw.dto.ToolIssueDto;
 import ru.otus.hw.exceptions.NotFoundException;
 import ru.otus.hw.exceptions.InvalidDataException;
-import ru.otus.hw.mappers.IssueToolMapper;
+import ru.otus.hw.mappers.ToolIssueMapper;
 import ru.otus.hw.models.ToolBalance;
 import ru.otus.hw.models.ToolIssueAct;
 import ru.otus.hw.repositories.ToolBalanceRepository;
@@ -23,7 +23,7 @@ public class ToolIssueServiceImpl implements ToolIssueService {
 
     private final ToolIssueActRepository issueActRepository;
 
-    private final IssueToolMapper issueToolMapper;
+    private final ToolIssueMapper toolIssueMapper;
 
     @Override
     @Transactional
@@ -47,7 +47,7 @@ public class ToolIssueServiceImpl implements ToolIssueService {
         val act = mapToAct(toolIssueCreateDto, toolBalance);
 
         val toolIssueAct = issueActRepository.save(act);
-        return issueToolMapper.mapToDto(toolIssueAct);
+        return toolIssueMapper.mapToDto(toolIssueAct);
     }
 
     private ToolIssueAct mapToAct(ToolIssueCreateDto toolIssueCreateDto, ToolBalance balance) {
