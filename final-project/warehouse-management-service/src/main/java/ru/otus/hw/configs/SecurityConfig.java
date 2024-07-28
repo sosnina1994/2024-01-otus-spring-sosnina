@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .sessionManagement((sessionManagement) -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/v3/**", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/**", "/swagger-ui/**", "/metrics/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll);
