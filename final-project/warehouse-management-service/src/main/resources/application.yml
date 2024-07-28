@@ -15,10 +15,6 @@ spring:
       ddl-auto: none
     show-sql: true
 
-logging:
-  level:
-    ROOT: INFO
-
 resilience4j:
   circuitbreaker:
     configs:
@@ -50,3 +46,7 @@ management:
       enabled: true
     defaults:
       enabled: true
+
+logging:
+  level:
+    ROOT: INFO

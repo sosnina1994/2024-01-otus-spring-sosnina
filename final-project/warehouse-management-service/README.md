@@ -10,6 +10,7 @@
 * Configs
     * **[SecurityConfig](src/main/java/ru/otus/hw/configs/SecurityConfig.java)** - конфигурация авторизации
     * **[SwaggerConfig](src/main/java/ru/otus/hw/configs/SwaggerConfig.java)** - конфигурация SwaggerOpenApi
+    * **[InterceptorConfig](src/main/java/ru/otus/hw/configs/InterceptorConfig.java)** - конфигурация перехватчиков
 * Controllers
     * **[ExceptionController](src/main/java/ru/otus/hw/controllers/ExceptionController.java)** - контроллер обработки
       ошибок
