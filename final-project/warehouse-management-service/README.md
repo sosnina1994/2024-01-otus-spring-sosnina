@@ -30,6 +30,8 @@
       выдачи инструментов
     * **[ToolIssueActController](src/main/java/ru/otus/hw/controllers/ToolIssueActController.java)** - контроллер
       отчетов выдачи инструментов
+    * **[ToolReportController](src/main/java/ru/otus/hw/controllers/ToolReportController.java)** - контроллер для
+      формирования отчетов в формате xlsx
 * Services
     * **[ToolTypeService](src/main/java/ru/otus/hw/services/ToolTypeService.java)** - интерфейс сервиса управления
       типами инструментов
@@ -63,6 +65,10 @@
       управления актами списания инструментов
     * **[ToolIssueActServiceImpl](src/main/java/ru/otus/hw/services/ToolIssueActServiceImpl.java)** - реализация
       интерфейса сервиса управления актами списания инструментов
+    * **[ToolReportService](src/main/java/ru/otus/hw/services/ToolReportService.java)** - интерфейс сервиса создания
+      отчетов
+    * **[ToolReportServiceImpl](src/main/java/ru/otus/hw/services/ToolReportServiceImpl.java)** - реализация
+      интерфейса сервиса создания отчетов
 * Repositories
     * **[ToolTypeRepository](src/main/java/ru/otus/hw/repositories/ToolTypeRepository.java)** - JPA-репозиторий типов
       инструментов
@@ -114,3 +120,7 @@
     * **[ToolIssueActMapper](src/main/java/ru/otus/hw/mappers/ToolIssueActMapper.java)** - картограф акта выдачи
       инструмента
     * **[UserMapper](src/main/java/ru/otus/hw/mappers/UserMapper.java)** - картограф пользователей
+* Helpers
+    * **[BalanceReportExcelGeneratorHelper](src/main/java/ru/otus/hw/helpers/BalanceReportExcelGeneratorHelper.java)** -
+      класс генерации отчетов в формате xlsx
+    

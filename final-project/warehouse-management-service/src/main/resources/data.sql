@@ -17,7 +17,7 @@ values ('Пластина для точения', 'DCMT070204-KM 3210', 3, 1),
 
 -- Балансы инструментов
 insert into tool_balances(tool_id, current_balance, min_balance)
-values (1, 10, 10),
+values (1, 8, 10),
        (2, 15, 3);
 
 -- Акты выдачи инструмента
