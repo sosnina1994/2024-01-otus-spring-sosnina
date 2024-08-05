@@ -40,7 +40,7 @@ public class ToolTypeController {
     }
 
     @Operation(description = "Получение типов инструмента")
-    @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "unknownToolTypeFallback")
+    @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "unknownToolTypeListFallback")
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/tool-types")
     public List<ToolTypeDto> getAll() {
